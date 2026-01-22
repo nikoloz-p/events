@@ -30,8 +30,3 @@ def delete_event(event_id: int,db: Session = Depends(get_db)):
         return {"detail": "ივენთი წაიშალა"}
     raise  HTTPException(status_code=404, detail="ივენთი ვერ მოიძებნა")
 
-# auth routes
-
-router = APIRouter(prefix="/auth", tags=["Auth"])
-
-# auth logic...

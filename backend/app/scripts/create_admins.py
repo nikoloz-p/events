@@ -23,7 +23,7 @@ def run():
     db.commit()
     db.close()
 
-    print("✅ Admin users created successfully")
+    print("Admin users created successfully")
 
 
 if __name__ == "__main__":
