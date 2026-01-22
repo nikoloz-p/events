@@ -1,0 +1,114 @@
+/* global */
+
+@font-face {
+  font-family: "BPG Arial";
+  src: url("../assets/bpg_arial_2009.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "BPG Arial";
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+li {
+  list-style: none;
+}
+
+a:hover {
+  color: #5b5b5b;
+}
+
+/* body */
+
+.create_event_body {
+  background-color: #dcdbdb;
+}
+
+/* header */
+
+.header {
+  background-color: #fff;
+  width: 100%;
+}
+
+.header_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px 0;
+}
+
+.header_nav_list {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-size: 21px;
+}
+
+/* content */
+
+.create_event_content {
+  height: calc(100vh - 87px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content_inner {
+  padding: 25px 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.events_title {
+  margin-bottom: 50px;
+}
+
+/* form */
+
+.add_event_form {
+  width: 100%;
+}
+
+.add_event_form input {
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  border: solid #dcdbdb 1px;
+  width: 100%;
+  font-size: 19px;
+}
+
+.add_event_form input:first-child {
+  margin-top: 0;
+}
+
+.add_event_btn {
+  margin-top: 30px;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add_event_btn:hover {
+  background-color: #5b5b5b;
+}

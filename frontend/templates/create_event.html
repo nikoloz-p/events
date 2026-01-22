@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>დაამატე ივენთი</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link
+      rel="icon"
+      href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAY==/
+    ABCAbQADAAEAEgAAAA=="
+    />
+  </head>
+  <body class="create_event_body">
+    <header class="header add_event_header">
+      <div class="header_inner">
+        <h1 class="logo">
+          <a href="index.html"> ლოგო </a>
+        </h1>
+        <nav class="header_nav">
+          <ul class="header_nav_list">
+            <li class="header_nav_list_item">
+              <a href="index.html">მთავარი</a>
+            </li>
+            <li class="header_nav_list_item">
+              <a href="დამატება">დამატება</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content create_event_content">
+      <div class="content_inner">
+        <h2 class="title events_title">დაამატე ივენთი</h2>
+        <form id="add_event_form" class="add_event_form">
+          <input
+            type="text"
+            name="event_name"
+            id="event_name"
+            placeholder="ივენთის სახელი"
+          />
+          <input
+            type="text"
+            name="event_city"
+            id="event_city"
+            placeholder="ქალაქი"
+          />
+          <input
+            type="text"
+            name="event_venue"
+            id="event_venue"
+            placeholder="ადგილი"
+          />
+          <input
+            type="text"
+            name="event_performers"
+            id="event_performers"
+            placeholder="შემსრულებელი"
+          />
+          <input
+            type="datetime-local"
+            name="event_date"
+            id="event_date"
+            placeholder="თარიღი"
+          />
+          <button type="submit" id="add_event_btn" class="add_event_btn">
+            დამატება
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+  <script type="module" src="../scripts/pages/create_event.js"></script>
+</html>
