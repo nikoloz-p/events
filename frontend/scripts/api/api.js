@@ -18,14 +18,3 @@ export async function apiFetch(path, options = {}) {
 
     return res.json();
 }
-
-export async function getEvents(path) {
-    const res = await fetch(`${API_BASE}${path}`);
-    
-    if (!res.ok) {
-        const error = await res.text();
-        throw new Error(error || "API error");
-    }
-
-    return res.json();
-}

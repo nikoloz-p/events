@@ -1,6 +1,6 @@
-import { getEvents } from '../api/api.js';
+import { getEvents, deleteEvents } from '../api/events.js';
 
-// elements
+// get events
 
 const eventsContainer = document.getElementById('events');
 
@@ -15,22 +15,58 @@ async function loadEvents() {
     }
 };
 
+// render events
+
 function renderEvents(events) {
     eventsContainer.innerHTML = '';
+
+    console.log(events);
+
 
     events.forEach(event => {
         const eventElement = document.createElement('div');
         eventElement.className = 'event';
         eventElement.innerHTML = `
             <h2 class="event_title"><a href="event_details.html?id=${event.id}">${event.title}</a></h2>
-            <p class="event_city">City: ${event.city}</p>
-            <p class="event_venue">Venue: ${event.venue}</p>
-            <p class="event_performers">Performers: ${event.performers}</p>
-            <p class="event_datetime">Date: ${new Date(event.datetime).toLocaleString()}</p>
+            <ul class="events_list">
+                <li class="events_list_item">
+                    <span>ქალაქი: </span>${event.city}
+                </li>
+                <li class="events_list_item">
+                    <span>მდებარეობა: </span><a href="${event.venue}">${event.venue}</a>
+                </li>
+                <li class="events_list_item">
+                    <span>შემსრულებლები: </span>${event.performers}
+                </li>
+                <li class="events_list_item">
+                    <span>თარიღი: </span>${new Date(event.datetime).toLocaleString()}
+                </li>
+            </ul>
+            <button class="event_remove_btn">წაშლა</button>
         `;
+
+        // delete events
+
+        const removeEventBtn = eventElement.querySelector('.event_remove_btn');
+
+        removeEventBtn.addEventListener('click', async () => {
+            console.log(event.id);
+            try {
+                await deleteEvents(event.id);
+                alert("ივენთი წარმატებით წაიშალა!");
+                window.location.reload();
+            } catch (error) {
+                console.error("შეცდომა ივენთის წაშლისას:", error);
+                alert(error.message);
+            }
+        });
+
+
         eventsContainer.appendChild(eventElement);
     });
 }
 
-loadEvents();
 
+
+
+loadEvents();

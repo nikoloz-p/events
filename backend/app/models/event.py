@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime
-from app.db.base import Base
+from backend.app.db.base import Base
 
 class Event(Base):
     __tablename__ = "events"
@@ -10,3 +10,4 @@ class Event(Base):
     venue = Column(String, nullable=False)
     performers = Column(String, nullable=False)
     datetime = Column(DateTime, nullable=False)
+

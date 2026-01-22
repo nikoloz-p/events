@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routes import events
+from backend.app.routes import events
 
 app = FastAPI(title="Events API")
 

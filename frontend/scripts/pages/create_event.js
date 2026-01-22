@@ -29,4 +29,4 @@ addEventForm.addEventListener('submit', async (e) => {
         console.error("შეცდომა ივენთის დამატებისას:", error);
         alert(error.message);
     }
-});
+}); 

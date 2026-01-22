@@ -9,4 +9,10 @@ export function createEvent(event) {
         method: "POST",
         body: JSON.stringify(event),
     });
+}   
+
+export function deleteEvents(eventId){
+    return apiFetch(`/events/${eventId}`, {
+        method: "DELETE",
+    })
 }

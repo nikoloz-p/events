@@ -1,4 +1,4 @@
-/* global */
+/* GLOBAL */
 
 @font-face {
   font-family: "BPG Arial";
@@ -29,13 +29,9 @@ a:hover {
   color: #5b5b5b;
 }
 
-/* body */
+/*==== INDEX PAGE ====*/
 
-.create_event_body {
-  background-color: #dcdbdb;
-}
-
-/* header */
+/* HEADER */
 
 .header {
   background-color: #fff;
@@ -58,7 +54,41 @@ a:hover {
   font-size: 21px;
 }
 
-/* content */
+.index_content {
+  max-width: 900px;
+  margin: 60px auto;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.events_list_item {
+  margin: 10px 0;
+}
+.event_remove_btn {
+  margin-top: 15px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #ff4d4d;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+/*======== CREATE EVENTS PAGE ========*/
+
+/* CREATE EVENT BODY */
+
+.create_event_body {
+  background-color: #dcdbdb;
+}
+
+/* ADD EVENT CONTENT */
 
 .create_event_content {
   height: calc(100vh - 87px);
@@ -79,7 +109,7 @@ a:hover {
   margin-bottom: 50px;
 }
 
-/* form */
+/* ADD EVENT FORM */
 
 .add_event_form {
   width: 100%;
