@@ -33,7 +33,7 @@ def login(
         value=token,
         httponly=True,
         samesite="lax",
-        secure=False,  # make true in prod (HTTPS)
+        secure=True,  
     )
 
     return {"access_token": token}  # optional, can remove later
