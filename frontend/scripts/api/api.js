@@ -1,4 +1,4 @@
-const API_BASE = "web-production-4a553.up.railway.app/api";
+const API_BASE = "https://web-production-4a553.up.railway.app/api";
 
 export async function apiFetch(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
