@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block title %}მთავარი{% endblock %} {% block
+content %}
+<main class="content index_content">
+  <section class="events" id="events"></section>
+</main>
+
+<script>
+  window.IS_ADMIN = JSON.parse(
+    '{{ (user and user.role == "admin") | tojson }}',
+  );
+</script>
+
+<script type="module" src="/static/scripts/api/api.js"></script>
+<script type="module" src="/static/scripts/pages/index.js"></script>
+{% endblock %}

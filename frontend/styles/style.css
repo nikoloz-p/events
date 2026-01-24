@@ -29,6 +29,12 @@ a:hover {
   color: #5b5b5b;
 }
 
+.btn {
+  height: 40px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
 /*==== INDEX PAGE ====*/
 
 /* HEADER */

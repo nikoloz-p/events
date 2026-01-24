@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Events{% endblock %}</title>
+
+    <link rel="stylesheet" href="/static/styles/style.css" />
+    <link
+      rel="icon"
+      href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAY==ABCAbQADAAEAEgAAAA=="
+    />
+  </head>
+
+  <body class="{% block body_class %}{% endblock %}">
+    <header class="header add_event_header">
+      <div class="header_inner">
+        <h1 class="logo">
+          <a href="/">ლოგო</a>
+        </h1>
+
+        <nav class="header_nav">
+          <ul class="header_nav_list">
+            <li class="header_nav_list_item">
+              <a href="/">მთავარი</a>
+            </li>
+
+            {% if user and user.role == "admin" %}
+            <li class="header_nav_list_item">
+              <a href="/events/create">დამატება</a>
+            </li>
+            <li class="header_nav_list_item">
+              <strong>{{ user.role }}</strong>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

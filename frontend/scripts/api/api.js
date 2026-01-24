@@ -1,21 +1,34 @@
-// API CALL
-
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = "http://127.0.0.1:8000/api";
 
 export async function apiFetch(path, options = {}) {
-    const res = await fetch(`${API_BASE}${path}`, {
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json",
-            ...options.headers,
-        },
-        ...options,
-    });
+  const res = await fetch(`${API_BASE}${path}`, {
+    credentials: "include", // IMPORTANT for cookies
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    ...options,
+  });
 
-    if (!res.ok) {
-        const error = await res.text();
-        throw new Error(error || "API error");
-    }
+  if (res.status === 401) {
+    let message = "Token expired";
 
-    return res.json();
+    try {
+      const data = await res.json();
+      if (data?.detail) message = data.detail;
+    } catch {}
+
+    alert(message);
+
+    // redirect to login
+    window.location.href = "/auth/login";
+    throw new Error("Unauthorized");
+  }
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(errorText || "API error");
+  }
+
+  return res.json();
 }

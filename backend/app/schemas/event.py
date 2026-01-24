@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -14,3 +15,11 @@ class EventOut(EventCreate):
 
     class Config:
         from_attributes = True
+
+
+class EventUpdate(BaseModel):
+    title: Optional[str]
+    city: Optional[str]
+    venue: Optional[str]
+    performers: Optional[str]
+    datetime: Optional[datetime]

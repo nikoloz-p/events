@@ -24,7 +24,7 @@ addEventForm.addEventListener('submit', async (e) => {
         alert("ივენთი წარმატებით დაემატა!");
         addEventForm.reset();
 
-        window.location.href = 'index.html';
+        window.location.href = '/';
     } catch (error) {
         console.error("შეცდომა ივენთის დამატებისას:", error);
         alert(error.message);

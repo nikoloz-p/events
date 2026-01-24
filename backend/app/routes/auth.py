@@ -5,9 +5,9 @@ from backend.app.models.user import User
 from backend.app.schemas.auth import LoginIn, LoginOut
 from backend.app.core.security import verify_password
 from backend.app.core.jwt import create_access_token
-from backend.app.deps import get_db
+from backend.app.deps import get_current_user, get_db
 
-router = APIRouter(prefix="/auth", tags=["Auth"])
+router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
 
 @router.post("/login", response_model=LoginOut)
@@ -43,3 +43,4 @@ def login(
 def logout(response: Response):
     response.delete_cookie("access_token")
     return {"detail": "logged out"}
+
