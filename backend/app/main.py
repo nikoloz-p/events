@@ -20,7 +20,7 @@ class CORSMiddlewareOverride(BaseHTTPMiddleware):
             "http://localhost:8000",
             "http://127.0.0.1:5500",
             "http://localhost:5500",
-            "https://web-production-4a553.up.railway.app",
+            "https://vnts.up.railway.app",
         }
 
         if origin in allowed_origins:
@@ -42,7 +42,7 @@ app.add_middleware(
         "http://localhost:8000",
         "http://127.0.0.1:5500",
         "http://localhost:5500",
-        "https://web-production-4a553.up.railway.app",
+        "https://vnts.up.railway.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
