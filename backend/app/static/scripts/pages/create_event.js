@@ -1,7 +1,5 @@
 import { createEvent } from '../api/events.js';
 
-
-
 const addEventForm = document.getElementById('add_event_form');
 
 addEventForm.addEventListener('submit', async (e) => {
@@ -9,10 +7,6 @@ addEventForm.addEventListener('submit', async (e) => {
 
     const formData = new FormData(addEventForm);
 
-    // debug, delete me later
-    for (const [key, value] of formData.entries()) {
-    console.log(key, value);
-}
 
     const rawDate = document.getElementById('event_date').value;
     formData.set('datetime', new Date(rawDate).toISOString());
