@@ -1,4 +1,9 @@
-const API_BASE = "https://web-production-4a553.up.railway.app/api";
+const API_BASE = (() => {
+  // Use the same origin as the current page to avoid CORS issues with cookies
+  const protocol = window.location.protocol;
+  const host = window.location.host;
+  return `${protocol}//${host}/api`;
+})();
 
 export async function apiFetch(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {

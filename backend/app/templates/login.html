@@ -10,7 +10,12 @@
     <main class="content">
       <div class="content_inner">
         <h1 class="login_title">ადმინი</h1>
-        <form method="post" action="/auth/login">
+        <form
+          method="post"
+          action="/auth/login"
+          id="auth_form"
+          class="auth_form"
+        >
           <input type="email" name="email" placeholder="იმეილი" />
           <input type="password" name="password" placeholder="პაროლი" />
           <button type="submit" id="login_btn" class="login_btn btn">
@@ -21,5 +26,5 @@
     </main>
   </body>
   <script type="module" src="/static/scripts/api/api.js"></script>
-  <script type="module" src="/static/scripts/pages/login.js"></script>
+  <script type="module" src="/static/scripts/pages/auth.js"></script>
 </html>
