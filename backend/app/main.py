@@ -51,10 +51,15 @@ app.add_middleware(
 
 
 BASE_DIR = Path(__file__).resolve().parent  # backend/app
+STATIC_DIR = BASE_DIR / "static"
+
+# Ensure static directory exists
+if not STATIC_DIR.exists():
+    raise FileNotFoundError(f"Static directory not found: {STATIC_DIR}")
 
 app.mount(
     "/static",
-    StaticFiles(directory=BASE_DIR / "static"),
+    StaticFiles(directory=STATIC_DIR),
     name="static",
 )
 app.include_router(events.router)
