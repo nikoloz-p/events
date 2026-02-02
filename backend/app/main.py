@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
 
+from pathlib import Path
+
 from backend.app.core.templates import BASE_DIR
 from backend.app.routes import events, auth, pages
 
@@ -47,12 +49,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+BASE_DIR = Path(__file__).resolve().parent  # backend/app
+
 app.mount(
     "/static",
     StaticFiles(directory=BASE_DIR / "static"),
     name="static",
 )
-
 app.include_router(events.router)
 app.include_router(auth.router)
 app.include_router(pages.router)
