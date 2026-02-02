@@ -71,9 +71,30 @@ a:hover {
   gap: 40px;
 }
 
-.events_list_item {
-  margin: 10px 0;
+.event {
+  display: flex;
 }
+
+.event_image_container {
+  margin-right: 20px;
+  max-width: 350px;
+  height: auto;
+}
+
+.event_image {
+  width: 100%;
+  height: auto;
+}
+
+.event_venue_link {
+  color: rgb(46, 77, 253);
+  font-weight: bold;
+}
+
+.events_list_item {
+  margin: 12px 0;
+}
+
 .event_remove_btn {
   margin-top: 15px;
   padding: 8px;
@@ -84,6 +105,10 @@ a:hover {
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
+}
+
+.event_edit_btn {
+  cursor: pointer;
 }
 
 /*======== CREATE EVENTS PAGE ========*/
@@ -132,6 +157,13 @@ a:hover {
 
 .add_event_form input:first-child {
   margin-top: 0;
+}
+
+.upload_img_label {
+  display: block;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: left;
 }
 
 .add_event_btn {
@@ -194,4 +226,11 @@ a:hover {
 
 .login_btn:hover {
   background-color: #5b5b5b;
+}
+
+.logout_btn {
+  color: #ff4d4d;
+  font-weight: bold;
+  font-size: #ff0000;
+  font-size: 16px;
 }

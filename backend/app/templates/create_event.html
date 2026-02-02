@@ -7,34 +7,33 @@ body_class %}create_event_body{% endblock %} {% block content %}
       <form id="add_event_form" class="add_event_form">
         <input
           type="text"
-          name="event_name"
+          name="title"
           id="event_name"
           placeholder="ივენთის სახელი"
         />
+        <input type="text" name="city" id="event_city" placeholder="ქალაქი" />
         <input
           type="text"
-          name="event_city"
-          id="event_city"
-          placeholder="ქალაქი"
-        />
-        <input
-          type="text"
-          name="event_venue"
+          name="venue"
           id="event_venue"
-          placeholder="მდებარეობა (გუგლ მეპის ლინკი)"
+          placeholder="მდებარეობა (მეპის ლინკი)"
         />
         <input
           type="text"
-          name="event_performers"
+          name="performers"
           id="event_performers"
           placeholder="შემსრულებელი"
         />
         <input
           type="datetime-local"
-          name="event_date"
+          name="datetime"
           id="event_date"
           placeholder="თარიღი"
         />
+        <label for="event_image" class="upload_img_label">
+          სურათი:
+          <input type="file" name="image" id="event_image" accept="image/*" />
+        </label>
         <button type="submit" id="add_event_btn" class="add_event_btn">
           დამატება
         </button>

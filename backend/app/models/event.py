@@ -10,4 +10,4 @@ class Event(Base):
     venue = Column(String, nullable=False)
     performers = Column(String, nullable=False)
     datetime = Column(DateTime, nullable=False)
-
+    image_url = Column(String, nullable=True)

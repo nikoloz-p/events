@@ -15,6 +15,7 @@ from alembic import context
 
 from backend.app.db.base import Base
 from backend.app.models.__all_models import *
+from backend.app.core.config import settings
 
 import os
 
@@ -22,7 +23,8 @@ import os
 # access to the values within the .ini file in use.
 config = context.config
 
-database_url = os.getenv("DATABASE_URL")
+database_url = settings.DATABASE_URL
+
 if not database_url:
     raise RuntimeError("DATABASE_URL is not set for Alembic")
 
