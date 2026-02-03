@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>{% block title %}Events{% endblock %}</title>
 
     <link rel="stylesheet" href="/static/styles/style.css" />
@@ -11,14 +13,28 @@
     />
   </head>
 
+  <div id="overlay"></div>
+
   <body class="{% block body_class %}{% endblock %}">
     <header class="header add_event_header">
       <div class="header_inner">
         <h1 class="logo">
           <a href="/">ლოგო</a>
         </h1>
+        <img
+          src="../static/assets/icons/burger_menu.svg"
+          alt="Menu"
+          id="burger_menu"
+          class="burger_menu"
+        />
 
-        <nav class="header_nav">
+        <nav class="header_nav" id="header_nav">
+          <img
+            src="../static/assets/icons/close_icon.svg"
+            alt=""
+            id="close_icon"
+            class="close_icon"
+          />
           <ul class="header_nav_list">
             <li class="header_nav_list_item">
               <a href="/">მთავარი</a>

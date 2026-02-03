@@ -7,6 +7,7 @@ from backend.app.deps import get_db, get_current_user
 
 from uuid import uuid4
 from pathlib import Path
+from datetime import datetime as dt
 
 from PIL import Image
 import io
@@ -60,8 +61,8 @@ async def create_event(
 
         try:
             img = Image.open(io.BytesIO(contents))
-            img = img.convert("RGB")        # required for JPEG
-            img.thumbnail(MAX_IMAGE_SIZE)   # resize (keeps aspect ratio)
+            img = img.convert("RGB")        
+            img.thumbnail(MAX_IMAGE_SIZE)   
 
             img.save(
                 file_path,
@@ -79,7 +80,7 @@ async def create_event(
         city=city,
         venue=venue,
         performers=performers,
-        datetime=datetime,
+        datetime=dt.fromisoformat(datetime),
         image_url=image_url,
     )
 
@@ -107,9 +108,14 @@ def get_event(event_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/{event_id}", response_model=EventOut)
-def update_event(
+async def update_event(
     event_id: int,
-    event: EventUpdate,
+    title: str | None = Form(None),
+    city: str | None = Form(None),
+    venue: str | None = Form(None),
+    performers: str | None = Form(None),
+    datetime: str | None = Form(None),
+    image: UploadFile | None = File(None),
     db: Session = Depends(get_db),
     current_user: None = Depends(get_current_user),
 ):
@@ -117,8 +123,45 @@ def update_event(
     if not db_event:
         raise HTTPException(status_code=404, detail="Event not found")
 
-    for key, value in event.model_dump(exclude_unset=True).items():
-        setattr(db_event, key, value)
+    if image:
+        if image.content_type not in ALLOWED_TYPES:
+            raise HTTPException(status_code=400, detail="Invalid image type")
+
+        contents = await image.read()
+
+        if len(contents) > MAX_FILE_SIZE:
+            raise HTTPException(status_code=400, detail="Image too large (max 5MB)")
+
+        filename = f"{uuid4()}.jpg"
+        file_path = UPLOAD_DIR / filename
+
+        try:
+            img = Image.open(io.BytesIO(contents))
+            img = img.convert("RGB")
+            img.thumbnail(MAX_IMAGE_SIZE)
+
+            img.save(
+                file_path,
+                format="JPEG",
+                quality=JPEG_QUALITY,
+                optimize=True,
+            )
+        except Exception:
+            raise HTTPException(status_code=400, detail="Invalid image file")
+
+        db_event.image_url = f"/uploads/{filename}"
+
+    # update provided fields
+    if title is not None:
+        db_event.title = title
+    if city is not None:
+        db_event.city = city
+    if venue is not None:
+        db_event.venue = venue
+    if performers is not None:
+        db_event.performers = performers
+    if datetime is not None:
+        db_event.datetime = dt.fromisoformat(datetime)
 
     db.commit()
     db.refresh(db_event)

@@ -17,8 +17,6 @@ async function loadEvents() {
 
 // render events
 
-
-
 function renderEvents(events) {
     eventsContainer.innerHTML = '';
 
@@ -36,6 +34,7 @@ function renderEvents(events) {
         ? `<img src="${event.image_url}" alt="${event.title}" class="event_image"/>`
         : '';
 
+
         eventElement.innerHTML = `
             <div class="event_image_container">
                 ${imageHtml}
@@ -44,7 +43,7 @@ function renderEvents(events) {
                 <h2 class="event_title">${event.title}</h2>
                 <ul class="events_list">
                     <li class="events_list_item"><span>ქალაქი:</span> ${event.city}</li>
-                    <li class="events_list_item"><span>მდებარეობა:</span> <a href="${event.venue}" target="_blank" class="event_venue_link">${event.venue}</a></li>
+                    <li class="events_list_item event_venue_link_item"><span>მდებარეობა:</span> <a href="${event.venue}" target="_blank" class="event_venue_link">ლინკი</a></li>
                     <li class="events_list_item"><span>შემსრულებლები:</span> ${event.performers}</li>
                     <li class="events_list_item"><span>თარიღი:</span> ${new Date(event.datetime).toLocaleString()}</li>
                 </ul>
@@ -79,3 +78,24 @@ if (window.IS_ADMIN) {
         }
     });
 }
+
+
+// nav
+
+const burgerIcon = document.getElementById('burger_menu');
+const navMenu = document.getElementById('header_nav');
+const overlay = document.getElementById('overlay');
+const closeIcon = document.getElementById('close_icon');
+
+burgerIcon.addEventListener('click', () => {
+    navMenu.classList.toggle('nav_visible');
+    overlay.classList.toggle('overlay_visible');
+    closeIcon.classList.toggle('close_icon_visible');
+
+});
+
+closeIcon.addEventListener('click', () => {
+    navMenu.classList.remove('nav_visible');
+    overlay.classList.remove('overlay_visible');
+    closeIcon.classList.remove('close_icon_visible');
+});

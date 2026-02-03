@@ -68,22 +68,30 @@ a:hover {
 .events {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 60px;
 }
 
 .event {
   display: flex;
+  gap: 20px;
 }
 
 .event_image_container {
   margin-right: 20px;
   max-width: 350px;
-  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .event_image {
   width: 100%;
   height: auto;
+}
+
+.event_venue_link_item {
+  display: flex;
+  gap: 10px;
 }
 
 .event_venue_link {
@@ -233,4 +241,70 @@ a:hover {
   font-weight: bold;
   font-size: #ff0000;
   font-size: 16px;
+}
+
+/*==== RESPONSIVE ====*/
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+  }
+  .event {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .event_image_container {
+    max-width: 300px;
+    margin-right: 0;
+  }
+
+  .header_nav {
+    display: none;
+  }
+  .close_icon {
+    display: none;
+    cursor: pointer;
+  }
+
+  #overlay {
+    background-color: #000;
+    opacity: 0.4;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    display: none;
+  }
+
+  .burger_icon {
+    cursor: pointer;
+  }
+
+  .header_nav.nav_visible {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 180px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 10;
+    text-align: center;
+    padding: 10px 15px;
+  }
+
+  #overlay.overlay_visible {
+    display: block;
+  }
+  .close_icon.close_icon_visible {
+    display: block;
+    margin-left: auto;
+  }
+
+  .header_nav_list {
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 15px;
+  }
 }
