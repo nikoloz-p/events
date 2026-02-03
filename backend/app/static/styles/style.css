@@ -53,6 +53,11 @@ a:hover {
   padding: 25px 0;
 }
 
+.close_icon,
+.burger_menu {
+  display: none;
+}
+
 .header_nav_list {
   display: flex;
   align-items: center;
