@@ -14,6 +14,7 @@ const city = document.getElementById("event_city");
 const venue = document.getElementById("event_venue");
 const performers = document.getElementById("event_performers");
 const date = document.getElementById("event_date");
+const description = document.getElementById("event_description");
 const image = document.getElementById("event_image");
 
 async function loadEvent() {
@@ -31,7 +32,7 @@ async function loadEvent() {
   venue.value = event.venue;
   performers.value = event.performers;
   date.value = event.datetime.slice(0, 16);
-  
+  description.value = event.description || '';
 }
 
 loadEvent();
@@ -44,6 +45,7 @@ editEventForm.addEventListener("submit", async (e) => {
   formData.append("venue", venue.value);
   formData.append("performers", performers.value);
   formData.append("datetime", date.value);
+  formData.append("description", description.value);
 
   if (image.files && image.files[0]) {
     formData.append("image", image.files[0]);

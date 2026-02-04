@@ -39,6 +39,7 @@ async def create_event(
     venue: str = Form(...),
     performers: str = Form(...),
     datetime: str = Form(...),
+    description: str = Form(None),
 
     image: UploadFile | None = File(None),
 
@@ -81,6 +82,7 @@ async def create_event(
         venue=venue,
         performers=performers,
         datetime=dt.fromisoformat(datetime),
+        description=description,
         image_url=image_url,
     )
 
@@ -115,6 +117,7 @@ async def update_event(
     venue: str | None = Form(None),
     performers: str | None = Form(None),
     datetime: str | None = Form(None),
+    description: str | None = Form(None),
     image: UploadFile | None = File(None),
     db: Session = Depends(get_db),
     current_user: None = Depends(get_current_user),
@@ -162,6 +165,8 @@ async def update_event(
         db_event.performers = performers
     if datetime is not None:
         db_event.datetime = dt.fromisoformat(datetime)
+    if description is not None:
+        db_event.description = description
 
     db.commit()
     db.refresh(db_event)

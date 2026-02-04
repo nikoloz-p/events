@@ -35,6 +35,10 @@ a:hover {
   border-radius: 8px;
 }
 
+/* pallete
+
+#69021E (dark red), #AA0235 (red), #030206(black), #021233(blue), #710755(purple) */
+
 /*==== INDEX PAGE ====*/
 
 /* HEADER */
@@ -79,11 +83,12 @@ a:hover {
 .event {
   display: flex;
   gap: 20px;
+  align-items: flex-start;
 }
 
-.event_image_container {
-  margin-right: 20px;
-  max-width: 350px;
+.event_main {
+  width: 350px;
+  min-width: 350px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -99,8 +104,22 @@ a:hover {
   gap: 10px;
 }
 
+.event_title {
+  color: #69021e;
+  color: #aa0235;
+  letter-spacing: 5px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.event h4 {
+  color: #042569;
+  font-size: 21px;
+  margin: 5px 0;
+}
+
 .event_venue_link {
-  color: rgb(46, 77, 253);
+  color: #042569;
   font-weight: bold;
 }
 
@@ -256,12 +275,11 @@ a:hover {
   }
   .event {
     flex-direction: column;
-    align-items: center;
   }
 
-  .event_image_container {
-    max-width: 300px;
-    margin-right: 0;
+  .event_main {
+    max-width: 280px;
+    min-width: 200px;
   }
 
   .header_nav {
@@ -311,5 +329,16 @@ a:hover {
     flex-direction: column;
     margin-top: 50px;
     gap: 15px;
+  }
+
+  .index_content {
+    padding: 0 20px;
+  }
+
+  .event_time {
+    margin-bottom: 10px;
+  }
+  .event_main {
+    font-size: 22px;
   }
 }

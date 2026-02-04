@@ -34,18 +34,28 @@ function renderEvents(events) {
         ? `<img src="${event.image_url}" alt="${event.title}" class="event_image"/>`
         : '';
 
+        const eventDate = new Date(event.datetime).toLocaleString().replaceAll("/", ".").split(",")[0];
+        const eventTime = new Date(event.datetime).toLocaleString().split(",")[1].trim().split(":").slice(0,2).join(":");
+
+        console.log(eventTime);
 
         eventElement.innerHTML = `
-            <div class="event_image_container">
+            <div class="event_main">
+                <h2 class="event_title">${event.title}</h2>
+                <h4 class="event_date">
+                    ${eventDate}
+                </h4>
+                <h4 class="event_time">
+                    ${eventTime}
+                </h4>
                 ${imageHtml}
             </div>
             <div class="event_details">
-                <h2 class="event_title">${event.title}</h2>
                 <ul class="events_list">
                     <li class="events_list_item"><span>ქალაქი:</span> ${event.city}</li>
                     <li class="events_list_item event_venue_link_item"><span>მდებარეობა:</span> <a href="${event.venue}" target="_blank" class="event_venue_link">ლინკი</a></li>
                     <li class="events_list_item"><span>შემსრულებლები:</span> ${event.performers}</li>
-                    <li class="events_list_item"><span>თარიღი:</span> ${new Date(event.datetime).toLocaleString()}</li>
+                    <li class="events_list_item"><span>აღწერა:</span> ${event.description || 'აღწერა არ არის მოცემული'}</li>
                 </ul>
                 ${adminControls}
             </div>

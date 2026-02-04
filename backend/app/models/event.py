@@ -13,4 +13,5 @@ class Event(Base):
     venue: Mapped[str] = mapped_column(String, nullable=False)
     performers: Mapped[str] = mapped_column(String, nullable=False)
     datetime: Mapped[dt] = mapped_column(DateTime, nullable=False)
+    description: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     image_url: Mapped[Optional[str]] = mapped_column(String, nullable=True)

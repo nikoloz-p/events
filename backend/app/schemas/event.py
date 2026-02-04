@@ -8,6 +8,7 @@ class EventCreate(BaseModel):
     venue: str
     performers: str
     datetime: datetime
+    description: Optional[str]
     image_url: Optional[str]
 
 
@@ -24,4 +25,5 @@ class EventUpdate(BaseModel):
     venue: Optional[str]
     performers: Optional[str]
     datetime: Optional[datetime]
+    description: Optional[str]
     image_url: Optional[str]
