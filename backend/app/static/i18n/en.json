@@ -1,0 +1,9 @@
+{
+    "event": {
+        "city": "City:",
+        "venue": "Venue:",
+        "performers": "Performers:",
+        "description": "Description:",
+        "link": "Link:"
+    }
+}

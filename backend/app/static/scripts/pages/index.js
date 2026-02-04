@@ -1,111 +1,100 @@
 import { getEvents, deleteEvents } from '../api/events.js';
+import { initI18n, loadLanguage, t, translatePage } from '../../js/i18n.js';
 
-// get events
+document.addEventListener('DOMContentLoaded', async () => {
+    await initI18n();
+    await loadEvents();
+});
+
+document.getElementById("en_btn")?.addEventListener("click", () => {
+    loadLanguage("en");
+});
+
+document.getElementById("ge_btn")?.addEventListener("click", () => {
+    loadLanguage("ka");
+});
+
+document.addEventListener("languageChanged", () => {
+    loadEvents();
+});
 
 const eventsContainer = document.getElementById('events');
 
 async function loadEvents() {
+    if (!eventsContainer) return;
+
     try {
         const events = await getEvents('/events/');
         renderEvents(events);
-
-    } catch (error) {
-        console.error("Error loading events:", error);
-        eventsContainer.innerHTML = `<p class="error">ივენთები ვერ მოიძებნა: ${error.message}</p>`;
+        translatePage(eventsContainer);
+    } catch {
+        eventsContainer.innerHTML = `
+            <p class="error">${t("errors.events_not_found")}</p>
+        `;
     }
-};
-
-// render events
+}
 
 function renderEvents(events) {
     eventsContainer.innerHTML = '';
+
+    const locale = localStorage.getItem("lang") === "ka" ? "ka-GE" : "en-US";
 
     events.forEach(event => {
         const eventElement = document.createElement('div');
         eventElement.className = 'event';
 
-        let adminControls = '';
-        if (window.IS_ADMIN) {
-            adminControls = `<button class="event_remove_btn btn">წაშლა</button>
-              <button class="event_edit_btn btn" data-id="${event.id}">რედაქტირება</button>`;
-        }
-
         const imageHtml = event.image_url
-        ? `<img src="${event.image_url}" alt="${event.title}" class="event_image"/>`
-        : '';
+            ? `<img src="${event.image_url}" alt="${event.title}" class="event_image"/>`
+            : '';
 
-        const eventDate = new Date(event.datetime).toLocaleString().replaceAll("/", ".").split(",")[0];
-        const eventTime = new Date(event.datetime).toLocaleString().split(",")[1].trim().split(":").slice(0,2).join(":");
-
-        console.log(eventTime);
+        const dateObj = new Date(event.datetime);
+        const eventDate = dateObj.toLocaleDateString(locale).replaceAll('/', '.');
+        const eventTime = dateObj.toLocaleTimeString(locale, {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
 
         eventElement.innerHTML = `
             <div class="event_main">
                 <h2 class="event_title">${event.title}</h2>
-                <h4 class="event_date">
-                    ${eventDate}
-                </h4>
-                <h4 class="event_time">
-                    ${eventTime}
-                </h4>
-                ${imageHtml}
+                <h4 class="event_date">${eventDate}</h4>
+                <h4 class="event_time">${eventTime}</h4>
             </div>
             <div class="event_details">
+                ${imageHtml}
                 <ul class="events_list">
-                    <li class="events_list_item"><span>ქალაქი:</span> ${event.city}</li>
-                    <li class="events_list_item event_venue_link_item"><span>მდებარეობა:</span> <a href="${event.venue}" target="_blank" class="event_venue_link">ლინკი</a></li>
-                    <li class="events_list_item"><span>შემსრულებლები:</span> ${event.performers}</li>
-                    <li class="events_list_item"><span>აღწერა:</span> ${event.description || 'აღწერა არ არის მოცემული'}</li>
+                    <li class="events_list_item"><span data-i18n="event.city"></span> ${event.city}</li>
+                    <li class="events_list_item">
+                        <span data-i18n="event.venue"></span>
+                        <a href="${event.venue}" class="event_venue_link" target="_blank">Link</a>
+                    </li>
+                    <li class="events_list_item"><span data-i18n="event.performers"></span> ${event.performers}</li>
+                    <li class="events_list_item event_description">
+                        <span data-i18n="event.description"></span>
+                        ${event.description || t("event.no_description")}
+                    </li>
                 </ul>
-                ${adminControls}
             </div>
         `;
 
         if (window.IS_ADMIN) {
-            const btn = eventElement.querySelector('.event_remove_btn');
-            btn.addEventListener('click', async () => {
-                try {
-                    await deleteEvents(event.id);
-                    window.location.reload();
-                } catch (err) {
-                    alert("წაშლა ვერ მოხერხდა");
-                }
-            });
+            const controls = document.createElement('div');
+            controls.innerHTML = `
+                <button class="event_remove_btn btn">X</button>
+                <button class="event_edit_btn btn" data-id="${event.id}">Edit</button>
+            `;
+            eventElement.querySelector('.event_details').appendChild(controls);
+
+            controls.querySelector('.event_remove_btn').onclick = async () => {
+                await deleteEvents(event.id);
+                loadEvents();
+            };
+
+            controls.querySelector('.event_edit_btn').onclick = e => {
+                window.location.href = `/events/${e.target.dataset.id}/edit`;
+            };
         }
 
         eventsContainer.appendChild(eventElement);
     });
 }
-
-
-loadEvents();
-
-if (window.IS_ADMIN) {
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('event_edit_btn')) {
-            const id = e.target.dataset.id;
-            window.location.href = `/events/${id}/edit`;
-        }
-    });
-}
-
-
-// nav
-
-const burgerIcon = document.getElementById('burger_menu');
-const navMenu = document.getElementById('header_nav');
-const overlay = document.getElementById('overlay');
-const closeIcon = document.getElementById('close_icon');
-
-burgerIcon.addEventListener('click', () => {
-    navMenu.classList.toggle('nav_visible');
-    overlay.classList.toggle('overlay_visible');
-    closeIcon.classList.toggle('close_icon_visible');
-
-});
-
-closeIcon.addEventListener('click', () => {
-    navMenu.classList.remove('nav_visible');
-    overlay.classList.remove('overlay_visible');
-    closeIcon.classList.remove('close_icon_visible');
-});

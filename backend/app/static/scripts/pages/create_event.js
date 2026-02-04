@@ -7,6 +7,10 @@ addEventForm.addEventListener('submit', async (e) => {
 
     const formData = new FormData(addEventForm);
 
+    const imageInput = document.getElementById('event_image');
+    if (!imageInput.files || imageInput.files.length === 0) {
+        formData.delete('image');
+    }
 
     const rawDate = document.getElementById('event_date').value;
     formData.set('datetime', new Date(rawDate).toISOString());

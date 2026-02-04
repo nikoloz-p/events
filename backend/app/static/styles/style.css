@@ -48,6 +48,11 @@ a:hover {
   width: 100%;
 }
 
+.logo a {
+  font-weight: 400;
+  font-style: normal;
+}
+
 .header_inner {
   display: flex;
   justify-content: space-between;
@@ -83,7 +88,7 @@ a:hover {
 .event {
   display: flex;
   gap: 20px;
-  align-items: flex-start;
+  flex-direction: column;
 }
 
 .event_main {
@@ -94,22 +99,27 @@ a:hover {
   flex-direction: column;
 }
 
+.event_details {
+  display: flex;
+  gap: 40px;
+}
+
 .event_image {
-  width: 100%;
+  max-width: 400px;
   height: auto;
 }
 
-.event_venue_link_item {
-  display: flex;
-  gap: 10px;
+.events_list_item:first-child {
+  margin-top: 0;
 }
 
 .event_title {
-  color: #69021e;
   color: #aa0235;
-  letter-spacing: 5px;
   font-weight: 900;
+  font-size: 50px;
   text-transform: uppercase;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .event h4 {
@@ -123,12 +133,16 @@ a:hover {
   font-weight: bold;
 }
 
+.event_description {
+  margin-top: 35px !important;
+}
+
 .events_list_item {
   margin: 12px 0;
+  font-size: 20px;
 }
 
 .event_remove_btn {
-  margin-top: 15px;
   padding: 8px;
   font-size: 16px;
   border-radius: 8px;
@@ -141,6 +155,20 @@ a:hover {
 
 .event_edit_btn {
   cursor: pointer;
+}
+
+.header_lang_control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.header_lang_control button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  font-size: 21px;
 }
 
 /*======== CREATE EVENTS PAGE ========*/
@@ -340,5 +368,9 @@ a:hover {
   }
   .event_main {
     font-size: 22px;
+  }
+
+  .event_details {
+    flex-direction: column;
   }
 }
